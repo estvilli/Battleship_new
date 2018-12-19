@@ -1,0 +1,80 @@
+@page
+@model ContactModel
+@{
+    ViewData["Title"] = "SomeFile";
+}
+<h2>@ViewData["Title"]</h2>
+
+<h3>@Model.Message</h3>
+
+Siia tuleb teise mängija laevade paigutamise sisestusväli
+
+
+
+
+
+
+        
+
+
+
+
+
+public void ManualShipCoordinates2()
+        {
+            //ask player 2 for ship coordinates
+            Console.WriteLine(GameBoard.GetBoardString21());
+            Console.WriteLine("Please enter the vertical coordinate of your carrier (1-...)");
+            GameBoard.x_coord = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the horizontal coordinate of your carrier (a-...)");
+            GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            Console.WriteLine(
+                "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
+            GameBoard.direction = Console.ReadLine().ToUpper();
+            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+
+            Console.WriteLine(GameBoard.GetBoardString21());
+            Console.WriteLine("Please enter the vertical coordinate of your battleship (1-...)");
+            GameBoard.x_coord = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the horizontal coordinate of your battleship (a-...)");
+            GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            Console.WriteLine(
+                "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
+            GameBoard.direction = Console.ReadLine().ToUpper();
+            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+
+            Console.WriteLine(GameBoard.GetBoardString21());
+            Console.WriteLine("Please enter the vertical coordinate of your submarine (1-...)");
+            GameBoard.x_coord = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the horizontal coordinate of your submarine (a-...)");
+            GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            Console.WriteLine(
+                "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
+            GameBoard.direction = Console.ReadLine().ToUpper();
+            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+
+            Console.WriteLine(GameBoard.GetBoardString21());
+            Console.WriteLine("Please enter the vertical coordinate of your cruiser (1-...)");
+            GameBoard.x_coord = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the horizontal coordinate of your cruiser (a-...)");
+            GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            Console.WriteLine(
+                "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
+            GameBoard.direction = Console.ReadLine().ToUpper();
+            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+
+            Console.WriteLine(GameBoard.GetBoardString21());
+            Console.WriteLine("Please enter the vertical coordinate of your patrol (1-...)");
+            GameBoard.x_coord = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the horizontal coordinate of your patrol (a-...)");
+            GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            Console.WriteLine(
+                "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
+            GameBoard.direction = Console.ReadLine().ToUpper();
+            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+        }
