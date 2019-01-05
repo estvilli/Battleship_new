@@ -1,36 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e94978bf-815f-4fad-ae99-f7a0530bf260" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Battleship/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Battleship/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Battleship/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Battleship/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Battleship/riderModule.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameUI/ObjectHolderForWebApp.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Configuration.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Configuration.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player1Attack.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player1Attack.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player1AttackResult.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player1AttackResult.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player1PlaceShips.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player1PlaceShips.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player2Attack.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player2Attack.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player2AttackResult.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player2AttackResult.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player2PlaceShips.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Player2PlaceShips.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/GameBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/GameBoard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Input.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Person.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameUI/BattleshipUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameUI/BattleshipUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/AFile.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/AFile.cshtml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/SomeFile.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/SomeFile.cshtml.cs" beforeDir="false" />
-    </list>
+    <list default="true" id="e94978bf-815f-4fad-ae99-f7a0530bf260" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -348,7 +319,7 @@
       <workItem from="1546256651124" duration="9531000" />
       <workItem from="1546452025819" duration="3745000" />
       <workItem from="1546592605125" duration="6464000" />
-      <workItem from="1546685167849" duration="10911000" />
+      <workItem from="1546685167849" duration="11435000" />
     </task>
     <task id="LOCAL-00001" summary="Intermediate step">
       <created>1545243823391</created>
@@ -361,7 +332,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59749000" />
+    <option name="totallyTimeSpent" value="60273000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -373,9 +344,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="733" y="23" width="534" height="720" extended-state="0" />
+    <frame x="390" y="23" width="877" height="720" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.6422764" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37844312" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -390,7 +361,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3280255" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Unit Tests" order="11" weight="0.32852563" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.3280255" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.61624205" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="14" weight="0.27388534" />
       <window_info anchor="bottom" id="REST Client" order="15" />
