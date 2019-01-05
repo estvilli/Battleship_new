@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e94978bf-815f-4fad-ae99-f7a0530bf260" name="Default Changelist" comment="" />
+    <list default="true" id="e94978bf-815f-4fad-ae99-f7a0530bf260" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Battleship/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Battleship/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,9 +189,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="713" />
+    <option name="x" value="657" />
     <option name="y" value="23" />
-    <option name="width" value="554" />
+    <option name="width" value="610" />
     <option name="height" value="720" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -319,7 +321,7 @@
       <workItem from="1546256651124" duration="9531000" />
       <workItem from="1546452025819" duration="3745000" />
       <workItem from="1546592605125" duration="6464000" />
-      <workItem from="1546685167849" duration="11683000" />
+      <workItem from="1546685167849" duration="12267000" />
     </task>
     <task id="LOCAL-00001" summary="Intermediate step">
       <created>1545243823391</created>
@@ -332,7 +334,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60521000" />
+    <option name="totallyTimeSpent" value="61105000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -344,9 +346,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="390" y="23" width="877" height="720" extended-state="0" />
+    <frame x="657" y="23" width="610" height="720" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37844312" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.556338" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
