@@ -1,0 +1,9 @@
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/bin/Debug/netstandard2.0/Domain.deps.json
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/bin/Debug/netstandard2.0/Domain.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/bin/Debug/netstandard2.0/Domain.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/obj/Debug/netstandard2.0/Domain.csprojAssemblyReference.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/obj/Debug/netstandard2.0/Domain.csproj.CoreCompileInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfoInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfo.cs
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/obj/Debug/netstandard2.0/Domain.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/obj/Debug/netstandard2.0/Domain.pdb

@@ -1,0 +1,151 @@
+@page
+@using Domain
+@using GameUI
+@model Player1PlaceShipsModel
+@{
+    ViewData["Title"] = "Player 1 ships coordinates entry page";
+}
+<h2>@ViewData["Title"]</h2>
+
+
+
+
+<body>
+
+
+<table style="border: 1px solid black">
+    <tr>
+        <td style="border: 1px solid black"> </td>
+        @for (int a = 0; a < GameUI.ObjectHolderForWebApp.GameBoard.Player1Board1[0].Count; a++)
+        {
+            <td style="border: 1px solid black">@GameUI.ObjectHolderForWebApp.GameBoard.Alphabet[a]</td>
+        }
+    </tr>
+    @for (int i = 0; i < GameUI.ObjectHolderForWebApp.GameBoard.Player1Board1.Count; i++)
+    {
+        <tr>
+            <td style="border: 1px solid black">@(i + 1)</td>
+
+            @for (int j = 0; j < GameUI.ObjectHolderForWebApp.GameBoard.Player1Board1[i].Count; j++)
+            {
+
+                switch (GameUI.ObjectHolderForWebApp.GameBoard.Player1Board1[i][j])
+                {
+                    case BoardSquareState.Empty:
+                        <td style="border: 1px solid black; width: 50px; height: 50px"> </td>
+                        ;
+                        break;
+                    case BoardSquareState.Unknown:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">-</td>
+                        ;
+                        break;
+                    case BoardSquareState.Ship:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">+</td>
+                        ;
+                        break;
+                    case BoardSquareState.Hit:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">X</td>
+                        ;
+                        break;
+                    case BoardSquareState.Miss:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">0</td>
+                        ;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        </tr>
+    }
+</table>
+
+@if (ObjectHolderForWebApp.GameBoard.isRerun)
+{
+    <p>Some ship coordinates you entered did not fit. Please enter new coordinates.</p>
+}
+
+
+<form method="post">
+    <fieldset>
+        <legend>Enter ships</legend>
+        <div>
+            <label for="CarrierVertCoord">Please enter the vertical coordinate of your carrier (1-...)</label>
+            <input type="text" name="CarrierVertCoord" value=""/>
+        </div>
+        <div>
+            <label for="CarrierHorizCoord">Please enter the horizontal coordinate of your carrier (a-...)</label>
+            <input type="text" name="CarrierHorizCoord" value=""/>
+        </div>
+        <div>
+            <label for="CarrierDirection">Please enter the direction of the ship: "W" - west, "N" - north, "E" - east, "S" - south</label>
+            <input type="text" name="CarrierDirection" value=""/>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+            <label for="BattleshipVertCoord">Please enter the vertical coordinate of your battleship (1-...)</label>
+            <input type="text" name="BattleshipVertCoord" value=""/>
+        </div>
+        <div>
+            <label for="BattleshipHorizCoord">Please enter the horizontal coordinate of your battleship (a-...)</label>
+            <input type="text" name="BattleshipHorizCoord" value=""/>
+        </div>
+        <div>
+            <label for="BattleshipDirection">Please enter the direction of the ship: "W" - west, "N" - north, "E" - east, "S" - south</label>
+            <input type="text" name="BattleshipDirection" value=""/>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+            <label for="SubVertCoord">Please enter the vertical coordinate of your submarine (1-...)</label>
+            <input type="text" name="SubVertCoord" value=""/>
+        </div>
+        <div>
+            <label for="SubHorizCoord">Please enter the horizontal coordinate of your submarine (a-...)</label>
+            <input type="text" name="SubHorizCoord" value=""/>
+        </div>
+        <div>
+            <label for="SubDirection">Please enter the direction of the ship: "W" - west, "N" - north, "E" - east, "S" - south</label>
+            <input type="text" name="SubDirection" value=""/>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+            <label for="CruiserVertCoord">Please enter the vertical coordinate of your cruiser (1-...)</label>
+            <input type="text" name="CruiserVertCoord" value=""/>
+        </div>
+        <div>
+            <label for="CruiserHorizCoord">Please enter the horizontal coordinate of your cruiser (a-...)</label>
+            <input type="text" name="CruiserHorizCoord" value=""/>
+        </div>
+        <div>
+            <label for="CruiserDirection">Please enter the direction of the ship: "W" - west, "N" - north, "E" - east, "S" - south</label>
+            <input type="text" name="CruiserDirection" value=""/>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+            <label for="PatrolVertCoord">Please enter the vertical coordinate of your patrol (1-...)</label>
+            <input type="text" name="PatrolVertCoord" value=""/>
+        </div>
+        <div>
+            <label for="PatrolHorizCoord">Please enter the horizontal coordinate of your patrol (a-...)</label>
+            <input type="text" name="PatrolHorizCoord" value=""/>
+        </div>
+        <div>
+            <label for="PatrolDirection">Please enter the direction of the ship: "W" - west, "N" - north, "E" - east, "S" - south</label>
+            <input type="text" name="PatrolDirection" value=""/>
+        </div>
+
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="Continue" class="continue"/>
+        </div>
+    </fieldset>
+</form>
+</body>

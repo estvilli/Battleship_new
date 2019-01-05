@@ -1,0 +1,59 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/WebApp/WebApp.csproj",
+    "projectName": "WebApp",
+    "projectPath": "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/WebApp/WebApp.csproj",
+    "outputPath": "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/WebApp/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.1"
+    ],
+    "frameworks": {
+      "netcoreapp2.1": {
+        "projectReferences": {
+          "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/DAL.csproj": {
+            "projectPath": "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/DAL.csproj"
+          },
+          "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/Domain.csproj": {
+            "projectPath": "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/Domain/Domain.csproj"
+          },
+          "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/GameUI.csproj": {
+            "projectPath": "/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/GameUI.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.1": {
+      "dependencies": {
+        "Microsoft.AspNetCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.1, )",
+          "autoReferenced": true
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.0, )",
+          "autoReferenced": true
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

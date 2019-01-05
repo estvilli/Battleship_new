@@ -1,0 +1,16 @@
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/ConsoleApp.deps.json
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/ConsoleApp.runtimeconfig.json
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/ConsoleApp.runtimeconfig.dev.json
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/ConsoleApp.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/ConsoleApp.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/Domain.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/GameUI.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/GameUI.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/bin/Debug/netcoreapp2.1/Domain.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.csprojAssemblyReference.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.csproj.CoreCompileInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.AssemblyInfoInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.AssemblyInfo.cs
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.csproj.CopyComplete
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/ConsoleApp/obj/Debug/netcoreapp2.1/ConsoleApp.pdb

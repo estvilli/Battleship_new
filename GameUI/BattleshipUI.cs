@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain;
 
 namespace GameUI
@@ -10,7 +11,11 @@ namespace GameUI
         private string automatic;
         private bool isAutomatic;
         private bool ContinuePlaying = true;
+
         private string userInput = null;
+        private Random rnd = new Random();
+
+        private bool continueAskingShipCoordinates = true;
 
         public BattleshipUI()
         {
@@ -37,16 +42,59 @@ namespace GameUI
             GameBoard = new GameBoard(tableDimension, isAutomatic);
             if (!isAutomatic)
             {
-                ManualShipCoordinates1();
-                ManualShipCoordinates2();
+                while (continueAskingShipCoordinates)
+                {
+                    if (ManualShipCoordinates1())
+                    {
+                        continueAskingShipCoordinates = false;
+                        break;
+                    }
+
+                    GameBoard.EmptyTable1();
+                }
+
+                continueAskingShipCoordinates = true;
+                while (continueAskingShipCoordinates)
+                {
+                    if (ManualShipCoordinates2())
+                    {
+                        continueAskingShipCoordinates = false;
+                        break;
+                    }
+
+                    GameBoard.EmptyTable2();
+                }
             }
-            GameBoard.placePlayer1Ships();
-            GameBoard.placePlayer2Ships();
+            else
+            {
+                while (continueAskingShipCoordinates)
+                {
+                    if (AutomaticShipCoordinates1())
+                    {
+                        continueAskingShipCoordinates = false;
+                        break;
+                    }
+
+                    GameBoard.EmptyTable1();
+                }
+
+                continueAskingShipCoordinates = true;
+                while (continueAskingShipCoordinates)
+                {
+                    if (AutomaticShipCoordinates2())
+                    {
+                        continueAskingShipCoordinates = false;
+                        break;
+                    }
+
+                    GameBoard.EmptyTable2();
+                }
+            }
+
+            GameBoard.FillEnemyShipTables();
             gamePlay1();
-
-
-            
         }
+
         public void gamePlay1()
         {
             while (ContinuePlaying == true)
@@ -84,7 +132,7 @@ namespace GameUI
                     Console.WriteLine("Miss!");
                 }
 
-                
+
                 for (int i = 0; i < GameBoard.TableDimension; i++)
                 {
                     for (int j = 0; j < GameBoard.TableDimension; j++)
@@ -159,8 +207,8 @@ namespace GameUI
                 GameBoard.shipSquareCount = 0;
             }
         }
-        
-        public void ManualShipCoordinates1()
+
+        public bool ManualShipCoordinates1()
         {
             //ask player 1 for ship coordinates
             Console.WriteLine(GameBoard.GetBoardString11());
@@ -172,9 +220,21 @@ namespace GameUI
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 4;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Carrier))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
-
+            Console.WriteLine("PLAYER 1");
             Console.WriteLine(GameBoard.GetBoardString11());
             Console.WriteLine("Please enter the vertical coordinate of your battleship (1-...)");
             GameBoard.x_coord = Int32.Parse(Console.ReadLine());
@@ -184,7 +244,19 @@ namespace GameUI
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 3;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Battleship))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
             Console.WriteLine(GameBoard.GetBoardString11());
             Console.WriteLine("Please enter the vertical coordinate of your submarine (1-...)");
@@ -195,7 +267,19 @@ namespace GameUI
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 2;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Submarine))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
             Console.WriteLine(GameBoard.GetBoardString11());
             Console.WriteLine("Please enter the vertical coordinate of your cruiser (1-...)");
@@ -206,7 +290,19 @@ namespace GameUI
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 1;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Cruiser))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
             Console.WriteLine(GameBoard.GetBoardString11());
             Console.WriteLine("Please enter the vertical coordinate of your patrol (1-...)");
@@ -217,34 +313,75 @@ namespace GameUI
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 0;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Patrol))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
+
+            return true;
         }
 
-        public void ManualShipCoordinates2()
+        public bool ManualShipCoordinates2()
         {
             //ask player 2 for ship coordinates
+            Console.WriteLine("PLAYER 2");
             Console.WriteLine(GameBoard.GetBoardString21());
             Console.WriteLine("Please enter the vertical coordinate of your carrier (1-...)");
             GameBoard.x_coord = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Please enter the horizontal coordinate of your carrier (a-...)");
             GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
-            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 4;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Carrier))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
+
+            Console.WriteLine("PLAYER 2");
             Console.WriteLine(GameBoard.GetBoardString21());
             Console.WriteLine("Please enter the vertical coordinate of your battleship (1-...)");
             GameBoard.x_coord = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Please enter the horizontal coordinate of your battleship (a-...)");
             GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
-            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
-
+            GameBoard.shipLength = 3;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Battleship))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
+            
+            
+            Console.WriteLine("PLAYER 2");
             Console.WriteLine(GameBoard.GetBoardString21());
             Console.WriteLine("Please enter the vertical coordinate of your submarine (1-...)");
             GameBoard.x_coord = Int32.Parse(Console.ReadLine());
@@ -254,35 +391,259 @@ namespace GameUI
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
+            GameBoard.shipLength = 2;
             GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Submarine))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
+            Console.WriteLine("PLAYER 2");
             Console.WriteLine(GameBoard.GetBoardString21());
             Console.WriteLine("Please enter the vertical coordinate of your cruiser (1-...)");
             GameBoard.x_coord = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Please enter the horizontal coordinate of your cruiser (a-...)");
             GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
-            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 1;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Cruiser))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
 
+            Console.WriteLine("PLAYER 2");
             Console.WriteLine(GameBoard.GetBoardString21());
             Console.WriteLine("Please enter the vertical coordinate of your patrol (1-...)");
             GameBoard.x_coord = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Please enter the horizontal coordinate of your patrol (a-...)");
             GameBoard.y_coord = GameBoard.letterToNumber[Console.ReadLine()];
-            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
             Console.WriteLine(
                 "Please enter the direction of the ship: \"W\" - west, \"N\" - north, \"E\" - east, \"S\" - south");
             GameBoard.direction = Console.ReadLine().ToUpper();
-            GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+            GameBoard.shipLength = 0;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Patrol))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, the ship could not be based on this location. Please try again.");
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool AutomaticShipCoordinates1()
+        {
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 4;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Carrier))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 3;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Battleship))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 2;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Submarine))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 1;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Cruiser))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 0;
+            if (GameBoard.CheckIfLocationIsOk1(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Patrol))
+            {
+                GameBoard.Player1ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player1ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer1Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool AutomaticShipCoordinates2()
+        {
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 4;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Carrier))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 3;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Battleship))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 2;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Submarine))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 1;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Cruiser))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+
+            GameBoard.x_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.y_coord = rnd.Next(1, tableDimension + 1);
+            GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+            GameBoard.direction = GameBoard.directionNumberToString[rnd.Next(0, 4)];
+            GameBoard.shipLength = 0;
+            if (GameBoard.CheckIfLocationIsOk2(GameBoard.x_coord, GameBoard.y_coord,
+                GameBoard.StringToEnum(GameBoard.direction), Ships.Patrol))
+            {
+                GameBoard.Player2ShipCoordinates.Add(GameBoard.x_coord.ToString() + GameBoard.y_coord.ToString());
+                GameBoard.Player2ShipDirections.Add(GameBoard.StringToEnum(GameBoard.direction));
+                GameBoard.placePlayer2Ship();
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 
-    /*public string RunGame(string command)
-    {
-        Console.Clear();
-        Console.WriteLine(GameBoard.GameBoard.GetBoardString());
-    }*/
 }

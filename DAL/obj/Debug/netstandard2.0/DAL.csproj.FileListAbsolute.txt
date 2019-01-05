@@ -1,0 +1,12 @@
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/bin/Debug/netstandard2.0/DAL.deps.json
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/bin/Debug/netstandard2.0/DAL.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/bin/Debug/netstandard2.0/DAL.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/bin/Debug/netstandard2.0/Microsoft.EntityFrameworkCore.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/bin/Debug/netstandard2.0/Microsoft.EntityFrameworkCore.xml
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.csprojAssemblyReference.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.csproj.CoreCompileInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.AssemblyInfoInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.AssemblyInfo.cs
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.csproj.CopyComplete
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/DAL/obj/Debug/netstandard2.0/DAL.pdb

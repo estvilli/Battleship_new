@@ -1,0 +1,110 @@
+@page
+@using Domain
+@using GameUI
+@model Player2AttackModel
+@{
+    ViewData["Title"] = "Player 2 attack";
+}
+
+<body>
+
+<h3>Player 2 own ships table</h3>
+<table style="border: 1px solid black">
+    <tr>
+        <td style="border: 1px solid black"> </td>
+        @for (int a = 0; a < GameUI.ObjectHolderForWebApp.GameBoard.Player2Board1[0].Count; a++)
+        {
+            <td style="border: 1px solid black">@GameUI.ObjectHolderForWebApp.GameBoard.Alphabet[a]</td>
+        }
+    </tr>
+    @for (int i = 0; i < GameUI.ObjectHolderForWebApp.GameBoard.Player2Board1.Count; i++)
+    {
+        <tr>
+            <td style="border: 1px solid black">@(i + 1)</td>
+
+            @for (int j = 0; j < GameUI.ObjectHolderForWebApp.GameBoard.Player2Board1[i].Count; j++)
+            {
+                switch (GameUI.ObjectHolderForWebApp.GameBoard.Player2Board1[i][j])
+                {
+                    case BoardSquareState.Empty:
+                        <td style="border: 1px solid black; width: 50px; height: 50px"> </td>
+                        break;
+                    case BoardSquareState.Unknown:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">-</td>
+                        break;
+                    case BoardSquareState.Ship:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">+</td>
+                        break;
+                    case BoardSquareState.Hit:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">X</td>
+                        break;
+                    case BoardSquareState.Miss:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">0</td>
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        </tr>
+    }
+</table>
+<h3>Player 2 enemy ships table</h3>
+<table style="border: 1px solid black">
+    <tr>
+        <td style="border: 1px solid black"> </td>
+        @for (int a = 0; a < GameUI.ObjectHolderForWebApp.GameBoard.Player2Board2[0].Count; a++)
+        {
+            <td style="border: 1px solid black">@GameUI.ObjectHolderForWebApp.GameBoard.Alphabet[a]</td>
+        }
+    </tr>
+    @for (int i = 0; i < GameUI.ObjectHolderForWebApp.GameBoard.Player2Board2.Count; i++)
+    {
+        <tr>
+            <td style="border: 1px solid black">@(i + 1)</td>
+            @for (int j = 0; j < GameUI.ObjectHolderForWebApp.GameBoard.Player2Board2[i].Count; j++)
+            {
+                switch (GameUI.ObjectHolderForWebApp.GameBoard.Player2Board2[i][j])
+                {
+                    case BoardSquareState.Empty:
+                        <td style="border: 1px solid black; width: 50px; height: 50px"> </td>
+                        break;
+                    case BoardSquareState.Unknown:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">-</td>
+                        break;
+                    case BoardSquareState.Ship:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">+</td>
+                        break;
+                    case BoardSquareState.Hit:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">X</td>
+                        break;
+                    case BoardSquareState.Miss:
+                        <td style="border: 1px solid black; width: 50px; height: 50px">0</td>
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        </tr>
+    }
+</table>
+
+<form method="post">
+    <fieldset>
+        <legend>Enter attack coordinates</legend>
+        <div>
+            <label for="VertCoord">Please enter the vertical coordinate of the enemy square you want to strike (1-...):</label>
+            <input type="text" name="VertCoord" value=""/>
+        </div>
+        <div>
+            <label for="HorizCoord">Please enter the horizontal coordinate of the enemy square you want to strike (a-...):</label>
+            <input type="text" name="HorizCoord" value=""/>
+        </div>
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="Continue" class="continue"/>
+        </div>
+    </fieldset>
+</form>
+</body>

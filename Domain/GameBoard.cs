@@ -6,13 +6,11 @@ using System.Text;
 using System.Xml.Linq;
 
 
-
 namespace Domain
 {
-    public static class GameBoard
+    public class GameBoard
     {
         public int TableDimension;
-        private int counter = 0;
         private int counter1 = 0;
         public int x_coord = 0;
         public int y_coord = 0;
@@ -21,7 +19,8 @@ namespace Domain
         private int rowCounter = 1;
         public string direction;
         private bool isAutomatic = false;
-
+        public int shipLength;
+        public bool isRerun = false;
 
 
         public List<List<BoardSquareState>> Player1Board1 { get; set; } = new List<List<BoardSquareState>>();
@@ -29,9 +28,6 @@ namespace Domain
         public List<List<BoardSquareState>> Player2Board1 { get; set; } = new List<List<BoardSquareState>>();
         public List<List<BoardSquareState>> Player2Board2 { get; set; } = new List<List<BoardSquareState>>();
 
-        //[position(x-koord, y-koord), ship, direction]
-        //public List<string> Player1Ships { get; set; } = new List<string>();
-        //public List<string> Player2Ships { get; set; } = new List<string>();
 
         //0 - carrier, 1 - battlehip, 3 - submarine, 4 - cruiser, 5 - patrol
         public List<Ships> ShipTypes { get; set; } = new List<Ships>();
@@ -57,10 +53,10 @@ namespace Domain
             {"y", 24}, {"z", 25}
         };
 
-        /*public Dictionary<int, Directions> numberToEnum = new Dictionary<int, Directions>
+        public Dictionary<int, string> directionNumberToString = new Dictionary<int, string>
         {
-            {0, Directions.W}, {1, Directions.N}, {2, Directions.E}, {3, Directions.S}
-        };*/
+            {0, "W"}, {1, "N"}, {2, "E"}, {3, "S"}
+        };
 
         Random random = new Random();
 
@@ -82,34 +78,13 @@ namespace Domain
             ShipLengths.Add(1);
             ShipLengths.Add(0);
 
-            /*Player1ShipCoordinates.Add("11");
-            Player1ShipCoordinates.Add("22");
-            Player1ShipCoordinates.Add("47");
-            Player1ShipCoordinates.Add("33");
-            Player1ShipCoordinates.Add("64");
-            Player1ShipDirections.Add(Directions.E);
-            Player1ShipDirections.Add(Directions.S);
-            Player1ShipDirections.Add(Directions.W);
-            Player1ShipDirections.Add(Directions.E);
-            Player1ShipDirections.Add(Directions.E);
-
-            Player2ShipCoordinates.Add("11");
-            Player2ShipCoordinates.Add("22");
-            Player2ShipCoordinates.Add("47");
-            Player2ShipCoordinates.Add("33");
-            Player2ShipCoordinates.Add("64");
-            Player2ShipDirections.Add(Directions.E);
-            Player2ShipDirections.Add(Directions.S);
-            Player2ShipDirections.Add(Directions.W);
-            Player2ShipDirections.Add(Directions.E);
-            Player2ShipDirections.Add(Directions.E);*/
 
 
             TableDimension = tableDimension;
             this.isAutomatic = isAutomatic;
 
             //player 1 own ships table
-            //Console.WriteLine("PLAYER 1");
+
             for (int i = 0; i < TableDimension; i++)
             {
                 Player1Board1.Add(new List<BoardSquareState>());
@@ -119,19 +94,10 @@ namespace Domain
                 }
             }
 
-            if (this.isAutomatic)
-            {
-                AutomaticShipCoordinates1();
-            }
-            else
-            {
-                
-            }
 
-            
 
             //player 2 own ships table
-            //Console.WriteLine("PLAYER 2");
+  
             for (int i = 0; i < TableDimension; i++)
             {
                 Player2Board1.Add(new List<BoardSquareState>());
@@ -141,63 +107,88 @@ namespace Domain
                 }
             }
 
-            if (this.isAutomatic)
-            {
-                AutomaticShipCoordinates2();
-            }
-            else
-            {
-                
-                
-            }
 
-            
         }
 
-        public void placePlayer1Ships()
+        
+
+        public void placePlayer1Ship()
         {
-            //place player 1 ships on table
-            foreach (var coordinate in Player1ShipCoordinates)
+            //place player 1 single ship on table
+            Player1Board1[x_coord - 1][y_coord] =
+                BoardSquareState.Ship;
+
+            if (StringToEnum(direction) == Directions.W)
             {
-                x_coord = Int32.Parse(coordinate.Substring(0, 1));
-                y_coord = Int32.Parse(coordinate.Substring(1, 1));
-                Player1Board1[x_coord - 1][y_coord] =
-                    BoardSquareState.Ship;
-
-                counter1 = ShipLengths[counter];
-                if (Player1ShipDirections[counter] == Directions.W)
+                for (int i = shipLength; i >= 0; i--)
                 {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player1Board1[x_coord - 1][y_coord - i] = BoardSquareState.Ship;
-                    }
+                    Player1Board1[x_coord - 1][y_coord - i] = BoardSquareState.Ship;
                 }
-                else if (Player1ShipDirections[counter] == Directions.N)
+            }
+            else if (StringToEnum(direction) == Directions.N)
+            {
+                for (int i = shipLength; i >= 0; i--)
                 {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player1Board1[x_coord - 1 - i][y_coord] = BoardSquareState.Ship;
-                    }
+                    Player1Board1[x_coord - 1 - i][y_coord] = BoardSquareState.Ship;
                 }
-                else if (Player1ShipDirections[counter] == Directions.E)
+            }
+            else if (StringToEnum(direction) == Directions.E)
+            {
+                for (int i = shipLength; i >= 0; i--)
                 {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player1Board1[x_coord - 1][y_coord + i] = BoardSquareState.Ship;
-                    }
+                    Player1Board1[x_coord - 1][y_coord + i] = BoardSquareState.Ship;
                 }
-                else if (Player1ShipDirections[counter] == Directions.S)
+            }
+            else if (StringToEnum(direction) == Directions.S)
+            {
+                for (int i = shipLength; i >= 0; i--)
                 {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player1Board1[x_coord - 1 + i][y_coord] = BoardSquareState.Ship;
-                    }
+                    Player1Board1[x_coord - 1 + i][y_coord] = BoardSquareState.Ship;
                 }
-
-                counter1 = 0;
-                counter++;
             }
 
+
+        }
+
+        public void placePlayer2Ship()
+        {
+            //place player 2 single ship ship on table
+
+            Player2Board1[x_coord - 1][y_coord] =
+                BoardSquareState.Ship;
+
+            if (StringToEnum(direction) == Directions.W)
+            {
+                for (int i = shipLength; i >= 0; i--)
+                {
+                    Player2Board1[x_coord - 1][y_coord - i] = BoardSquareState.Ship;
+                }
+            }
+            else if (StringToEnum(direction) == Directions.N)
+            {
+                for (int i = shipLength; i >= 0; i--)
+                {
+                    Player2Board1[x_coord - 1 - i][y_coord] = BoardSquareState.Ship;
+                }
+            }
+            else if (StringToEnum(direction) == Directions.E)
+            {
+                for (int i = shipLength; i >= 0; i--)
+                {
+                    Player2Board1[x_coord - 1][y_coord + i] = BoardSquareState.Ship;
+                }
+            }
+            else if (StringToEnum(direction) == Directions.S)
+            {
+                for (int i = shipLength; i >= 0; i--)
+                {
+                    Player2Board1[x_coord - 1 + i][y_coord] = BoardSquareState.Ship;
+                }
+            }
+        }
+
+        public void FillEnemyShipTables()
+        {
             //player 1 enemy ships table
 
             for (int i = 0; i < TableDimension; i++)
@@ -208,55 +199,6 @@ namespace Domain
                     Player1Board2[i].Add(BoardSquareState.Unknown);
                 }
             }
-
-            counter = 0;
-        }
-        
-        public void placePlayer2Ships()
-        {
-            //place player 2 ships on table
-            foreach (var coordinate in Player1ShipCoordinates)
-            {
-                x_coord = Int32.Parse(coordinate.Substring(0, 1));
-                y_coord = Int32.Parse(coordinate.Substring(1, 1));
-                Player2Board1[x_coord][y_coord] =
-                    BoardSquareState.Ship;
-
-                counter1 = ShipLengths[counter];
-                if (Player2ShipDirections[counter] == Directions.W)
-                {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player2Board1[x_coord - 1][y_coord - i] = BoardSquareState.Ship;
-                    }
-                }
-                else if (Player2ShipDirections[counter] == Directions.N)
-                {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player2Board1[x_coord - 1 - i][y_coord] = BoardSquareState.Ship;
-                    }
-                }
-                else if (Player2ShipDirections[counter] == Directions.E)
-                {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player2Board1[x_coord - 1][y_coord + i] = BoardSquareState.Ship;
-                    }
-                }
-                else if (Player2ShipDirections[counter] == Directions.S)
-                {
-                    for (int i = counter1; i >= 0; i--)
-                    {
-                        Player2Board1[x_coord - 1 + i][y_coord] = BoardSquareState.Ship;
-                    }
-                }
-
-                counter1 = 0;
-                counter++;
-            }
-
-            counter = 0;
 
             //player 2 enemy ships table
 
@@ -270,15 +212,35 @@ namespace Domain
             }
         }
 
-        /*public void gamePlay()
+        public void EmptyTable1()
         {
-            
-        }*/
+            Player1Board1 = new List<List<BoardSquareState>>();
+            for (int i = 0; i < TableDimension; i++)
+            {
+                Player1Board1.Add(new List<BoardSquareState>());
+                for (int j = 0; j < TableDimension; j++)
+                {
+                    Player1Board1[i].Add(BoardSquareState.Empty);
+                }
+            }
+        }
+        
+        public void EmptyTable2()
+        {
+            Player2Board1 = new List<List<BoardSquareState>>();
+            for (int i = 0; i < TableDimension; i++)
+            {
+                Player2Board1.Add(new List<BoardSquareState>());
+                for (int j = 0; j < TableDimension; j++)
+                {
+                    Player2Board1[i].Add(BoardSquareState.Empty);
+                }
+            }
+        }
 
         public void Player1Turn()
         {
-            //x_coord = Int32.Parse(hitCoordinates.Substring(0, 1));
-            //y_coord = Int32.Parse(hitCoordinates.Substring(1, 1));
+
             if (Player2Board1[x_coord][y_coord] == BoardSquareState.Ship)
             {
                 Player1Board2[x_coord][y_coord] = BoardSquareState.Hit;
@@ -295,8 +257,7 @@ namespace Domain
 
         public void Player2Turn()
         {
-            //x_coord = Int32.Parse(hitCoordinates.Substring(0, 1));
-            //y_coord = Int32.Parse(hitCoordinates.Substring(1, 1));
+
             if (Player1Board1[x_coord][y_coord] == BoardSquareState.Ship)
             {
                 Player2Board2[x_coord][y_coord] = BoardSquareState.Hit;
@@ -470,34 +431,232 @@ namespace Domain
             }
         }
 
-        
 
-        public void AutomaticShipCoordinates1()
+
+
+        public bool CheckIfLocationIsOk1(int x_coordinate, int y_coordinate, Domain.Directions direction, Ships shipType)
         {
-            for (int i = 0; i < 5; i++)
+            if (shipType == Ships.Carrier)
             {
-                StringBuilder sb1 = new StringBuilder();
-                sb1.Append(random.Next(0, 10).ToString());
-                sb1.Append(random.Next(0, 10).ToString());
-                Player1ShipCoordinates.Add(sb1.ToString());
-
-                Player1ShipDirections.Add(NumberToEnum(random.Next(0, 4)));
+                counter1 = 4;
             }
-        }
-
-        public void AutomaticShipCoordinates2()
-        {
-            for (int i = 0; i < 5; i++)
+            else if (shipType == Ships.Battleship)
             {
-                StringBuilder sb1 = new StringBuilder();
-                sb1.Append(random.Next(0, 10).ToString());
-                sb1.Append(random.Next(0, 10).ToString());
-                Player2ShipCoordinates.Add(sb1.ToString());
-
-                Player2ShipDirections.Add(NumberToEnum(random.Next(0, 4)));
+                counter1 = 3;
             }
-        }
+            else if (shipType == Ships.Submarine)
+            {
+                counter1 = 2;
+            }
+            else if (shipType == Ships.Cruiser)
+            {
+                counter1 = 1;
+            }
+            else if (shipType == Ships.Patrol)
+            {
+                counter1 = 0;
+            }
 
+
+            if (x_coordinate - 1 >= TableDimension || y_coordinate >= TableDimension || x_coordinate - 1 < 0 ||
+                y_coordinate < 0)
+            {
+                counter1 = 0;
+                return false;
+            }
+            else if (Player1Board1[x_coordinate - 1][y_coordinate] ==
+                     BoardSquareState.Ship)
+            {
+                counter1 = 0;
+                return false;
+            }
+
+            if (direction == Directions.W)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (y_coordinate - i >= TableDimension || y_coordinate - i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player1Board1[x_coordinate - 1][y_coordinate - i] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+            else if (direction == Directions.N)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (x_coordinate - 1 - i >= TableDimension || x_coordinate - 1 - i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player1Board1[x_coordinate - 1 - i][y_coordinate] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+
+            else if (direction == Directions.E)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (y_coordinate + i >= TableDimension || y_coordinate + i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player1Board1[x_coordinate - 1][y_coordinate + i] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+            else if (direction == Directions.S)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (x_coordinate - 1 + i >= TableDimension || x_coordinate - 1 + i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player1Board1[x_coordinate - 1 + i][y_coordinate] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+
+            
+            
+            
+            counter1 = 0;
+            return true;
+        }
         
+        public bool CheckIfLocationIsOk2(int x_coordinate, int y_coordinate, Domain.Directions direction, Ships shipType)
+        {
+            if (shipType == Ships.Carrier)
+            {
+                counter1 = 4;
+            }
+            else if (shipType == Ships.Battleship)
+            {
+                counter1 = 3;
+            }
+            else if (shipType == Ships.Submarine)
+            {
+                counter1 = 2;
+            }
+            else if (shipType == Ships.Cruiser)
+            {
+                counter1 = 1;
+            }
+            else if (shipType == Ships.Patrol)
+            {
+                counter1 = 0;
+            }
+
+
+            if (x_coordinate - 1 >= TableDimension || y_coordinate >= TableDimension || x_coordinate - 1 < 0 ||
+                y_coordinate < 0)
+            {
+                counter1 = 0;
+                return false;
+            }
+            else if (Player2Board1[x_coordinate - 1][y_coordinate] ==
+                     BoardSquareState.Ship)
+            {
+                counter1 = 0;
+                return false;
+            }
+
+            if (direction == Directions.W)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (y_coordinate - i >= TableDimension || y_coordinate - i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player2Board1[x_coordinate - 1][y_coordinate - i] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+            else if (direction == Directions.N)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (x_coordinate - 1 - i >= TableDimension || x_coordinate - 1 - i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player2Board1[x_coordinate - 1 - i][y_coordinate] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+
+            else if (direction == Directions.E)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (y_coordinate + i >= TableDimension || y_coordinate + i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player2Board1[x_coordinate - 1][y_coordinate + i] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+            else if (direction == Directions.S)
+            {
+                for (int i = counter1; i >= 0; i--)
+                {
+                    if (x_coordinate - 1 + i >= TableDimension || x_coordinate - 1 + i < 0)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                    else if (Player2Board1[x_coordinate - 1 + i][y_coordinate] ==
+                             BoardSquareState.Ship)
+                    {
+                        counter1 = 0;
+                        return false;
+                    }
+                }
+            }
+           
+            counter1 = 0;
+            return true;
+        }
     }
 }

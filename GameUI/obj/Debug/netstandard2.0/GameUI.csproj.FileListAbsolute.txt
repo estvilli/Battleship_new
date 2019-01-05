@@ -1,0 +1,12 @@
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/bin/Debug/netstandard2.0/GameUI.deps.json
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/bin/Debug/netstandard2.0/GameUI.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/bin/Debug/netstandard2.0/GameUI.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/bin/Debug/netstandard2.0/Domain.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/bin/Debug/netstandard2.0/Domain.pdb
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.csprojAssemblyReference.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.csproj.CoreCompileInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.AssemblyInfoInputs.cache
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.AssemblyInfo.cs
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.csproj.CopyComplete
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.dll
+/Users/williamstraus/Documents/Ulikool/C# programmeerimine/Projekt/Battleship/GameUI/obj/Debug/netstandard2.0/GameUI.pdb
