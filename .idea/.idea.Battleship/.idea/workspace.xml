@@ -187,9 +187,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="390" />
+    <option name="x" value="713" />
     <option name="y" value="23" />
-    <option name="width" value="877" />
+    <option name="width" value="554" />
     <option name="height" value="720" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -319,7 +319,7 @@
       <workItem from="1546256651124" duration="9531000" />
       <workItem from="1546452025819" duration="3745000" />
       <workItem from="1546592605125" duration="6464000" />
-      <workItem from="1546685167849" duration="11435000" />
+      <workItem from="1546685167849" duration="11683000" />
     </task>
     <task id="LOCAL-00001" summary="Intermediate step">
       <created>1545243823391</created>
@@ -332,7 +332,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60273000" />
+    <option name="totallyTimeSpent" value="60521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
